@@ -55,20 +55,24 @@ angular.module('testApp.controllers', [])
 
             ]
         }])
-    .controller('StockCtrl', ['$scope', '$stateParams', 'stockDataService',
-        function ($scope, $stateParams, stockDataService) {
+    .controller('StockCtrl', ['$scope', '$stateParams', 'stockDataService', 'dateService',
+        function ($scope, $stateParams, stockDataService,dateService) {
+
+
+            console.log(dateService.currentDate());
+            console.log(dateService.oneYearAgoDate());
 
 
             $scope.ticker = $stateParams.stockTicker;
-            $scope.chartView=1;
+            $scope.chartView = 1;
 
             $scope.$on("$ionicView.afterEnter", function () {
                 getPriceData();
             });
 
-            $scope.chartViewFunc =function (n) {
+            $scope.chartViewFunc = function (n) {
 
-                $scope.chartView=n;
+                $scope.chartView = n;
 
             };
 
@@ -78,8 +82,7 @@ angular.module('testApp.controllers', [])
 
                 promise.then(function (data) {
 
-                    $scope.stockPriceData=data;
-                    console.log(data);
+                    $scope.stockPriceData = data;
 
                 });
 
